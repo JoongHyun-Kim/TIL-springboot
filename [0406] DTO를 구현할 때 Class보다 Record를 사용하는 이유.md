@@ -110,6 +110,81 @@ Record를 활용하면 코드의 간결성과 가독성을 높일 수 있고, �
 <br>
 <br>
 
+## Q&A
+> 스터디 시간에 나온 Q&A를 정리한 내용
+
+**Q) Record의 경우 필드 위에 @JsonProperty와 같은 annotation을 붙일 수 있는가?** <br>
+**A)** 아래는 Java Langauge Docs의 Record Classes 관련 부분이다.
+
+**You can annotate a record class and its individual components**, for example:
+```java
+import java.lang.annotation.*;
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface GreaterThanZero { }
+```
+```java
+record Rectangle(
+    @GreaterThanZero double length,
+    @GreaterThanZero double width) { }
+```
+
+> If you annotate a record component, then the annotation may be propagated to members and constructors of the record class. This propagation is determined by the contexts in which the annotation interface is applicable. In the previous example, the @Target(ElementType.FIELD) meta-annotation means that the @GreaterThanZero annotation is propagated to the field corresponding to the record component. Consequently, this record class declaration would be equivalent to the following normal class declaration:
+
+<br>
+
+문서에 따르면 Record 클래스는 물론 그 구성 요소에도 annotation을 달 수 있는데, Record의 구성 요소에 annotation을 달면 record의 멤버 및 생성자에 전파될 수 있다. 
+이 때, 전파 여부는 annotation interface가 적용 가능한 컨텍스트에 의해 결정된다. 위 예시에서 @Target(ElementType.FIELD)에 의해, @GreaterThanZero가 record의 구성 요소에 해당하는 필드로 전파될 수 있는 것이다.
+결국 위 record class는 아래와 같은 일반 Class와 동일하다.
+```java
+public final class Rectangle {
+    private final @GreaterThanZero double length;
+    private final @GreaterThanZero double width;
+    
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+    
+    double length() { return this.length; }
+    double width() { return this.width; }
+}
+```
+<br>
+<br>
+
+**Q) Record를 사용하면 @Data annotation이 자동으로 붙는 것인가?** <br>
+**A)** [Lombok 공식문서](https://projectlombok.org/features/Data)에 따르면, `Data` annotation은 @ToString, @EqualsAndHashCode, @Getter, @Setter and @RequiredArgsConstructor 기능 묶음이다.
+@Data annotation이 자동으로 붙는다기 보다는, Record를 사용하면 `모든 필드에 대한 getter`, `equals`, `hashCode`, `toString` 메서드가 자동으로 제공된다고 이해하면 좋을 것 같다.
+
+<br>
+<br>
+
+**Q) Record를 사용하는 경우 새로운 객체를 어떤 방식으로 생성할 수 있는가?** <br>
+**A)**
+```java
+public record StudentRecord(
+  String firstName, 
+  String lastName, 
+  Long studentId, 
+  String email, 
+  String phoneNumber, 
+  String address, 
+  String country, 
+  int age) {
+}
+```
+위와 같은 Student 정보를 담고 있는 Record가 있다고 하자. 새로운 StudentRecord 객체를 생성하려면 아래와 같이 new 키워드를 사용해 간단히 구현할 수 있다.
+```java
+StudentRecord john = new StudentRecord(
+  "John", "Doe", null, "john@doe.com", null, null, "England", 20);
+```
+그러나 코드를 보면 알 수 있듯이, StudentRecord의 경우처럼 필드가 많은 경우에는, 각 필드가 어떤 것을 의미하는지 알아보기 어려울 수 있다는 단점이 존재한다. 
+결국 이렇게 필드가 많거나 일부 필드는 필수값이 아닌 경우라면, record 보다는 class와 @Builder 패턴을 활용해 어떤 필드값에 어떤 값이 들어가는지 명시해주는게 더 좋을 수도 있다.
+
+<br>
+<br>
+
 ## References
 [Java 14 Record Keyword | Baeldung](https://www.baeldung.com/java-record-keyword)
 
@@ -118,3 +193,4 @@ Record를 활용하면 코드의 간결성과 가독성을 높일 수 있고, �
 [Deep Dive with Java Records with Jason Young](https://www.youtube.com/watch?v=eC5X0NEZ8hE)
 
 [Record (Java SE 19 & JDK 19 [build 1])](https://download.java.net/java/early_access/panama/docs/api/java.base/java/lang/Record.html)
+[Java Language Updates-Record Classes](https://docs.oracle.com/en/java/javase/17/language/records.html)
