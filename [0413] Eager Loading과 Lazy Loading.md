@@ -116,6 +116,16 @@ List<UserEager> user = sessionEager.createQuery("From UserEager").list();
 <br>
 <br>
 
+## Q&A
+> 스터디 시간에 받은 질문을 정리한 내용
+
+**Q1)** FetchType.LAZY는 어느 연관관계에 지정해주는게 좋은가?
+
+
+<br>
+<br>
+<br>
+
 ## References
 [Eager/Lazy Loading in Hibernate Baeldung](https://www.baeldung.com/hibernate-lazy-eager-loading)
 [Difference between FetchType LAZY and EAGER in Java Persistence API?](https://stackoverflow.com/questions/2990799/difference-between-fetchtype-lazy-and-eager-in-java-persistence-api)
