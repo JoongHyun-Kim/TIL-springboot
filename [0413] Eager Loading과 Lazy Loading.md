@@ -119,7 +119,9 @@ List<UserEager> user = sessionEager.createQuery("From UserEager").list();
 ## Q&A
 > 스터디 시간에 받은 질문을 정리한 내용
 
-**Q1)** FetchType.LAZY는 어느 연관관계에 지정해주는게 좋은가?
+**Q1)** FetchType.LAZY는 어느 연관관계에 지정해주는게 좋은가? <br>
+**A)** Eager Loading(즉시 로딩) 방법을 사용할 경우, 예상하지 못한 쿼리들이 나가는 경우가 많기 때문에 기본적으로 Lazy Loading(지연 로딩) 방법을 채택하는 것이 좋다. 
+위에서 말했듯, `~ToOne` 연관관계는 기본값이 FetchType.Eager이므로, 명시적으로 Lazy 타입을 지정해줘야 한다.
 
 
 <br>
