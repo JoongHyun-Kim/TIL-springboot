@@ -81,7 +81,24 @@ public class ComponentApplication {
 <br>
 <br>
 
+## Q&A
+> 스터디 시간에 나온 질문들을 정리해보자!
+
+**Q) @Component와 @Bean은 기본적으로 동일한 기능을 하는 것인가?** <br>
+**A)** 기본적으로 @Component와 @Bean은 Spring에서 bean을 등록하는데 사용된다는 점에서 동일하고, 위에서 정리한 것처럼 bean을 등록하는 방식이나 사용되는 경우에 차이점이 있다.
+
+<br>
+<br>
+
+**Q) Configuration class에서 @Bean을 사용하는 이유** <br>
+**A)** @Configuration annotation은 스프링 IOC Container에게 해당 클래스를 Bean 구성 Class임을 알리는 역할을 한다. <br>
+또한, 프록시 패턴을 적용해 @Bean annotation을 통해 수동으로 등록하는 bean이 반드시 싱글톤으로 생성됨을 보장하기 위해 사용된다. 따라서, 싱글톤으로 생성됨을 보장하기 위해 @Bean은 @Configuration 안에서만 사용하는 것이 좋다고 한다.
+<br>
+<br>
+
 ## References
 https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+
 https://www.baeldung.com/spring-component-annotation
+
 https://medium.com/@AlexanderObregon/the-art-of-meta-annotations-in-spring-creating-custom-compositions-86d000d33796
