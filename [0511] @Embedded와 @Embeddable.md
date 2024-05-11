@@ -87,6 +87,14 @@ Embeddable 클래스는 entity 클래스와는 다르게 @Id 속성이 없고, �
 <br>
 <br>
 
+## Q&A
+> 스터디 시간에 나온 질문들 정리!
+
+**Q1) 예시 코드에서 UserProfile을 entity가 아닌 embeddable 클래스 타입으로 구현했는데, 그 이유가 무엇인지?**  
+**A)** Embeddable 클래스의 장점이 여러 개 있지만, 개인적으로는 embeddable 클래스로 구현함으로써 얻는 코드 가독성이 가장 큰 이유였던 것 같다. 그리고 이 예제 코드에서는 아니지만, 여러 entity에서 반복적으로 쓰이는, 같은 종류의 컬럼들이 있는 경우에 embeddable 클래스로 만들고 entity에 embed하는 경우에 사용하면 보다 간결하고 편하게 entity를 구성할 수 있는 것 같다.
+<br>
+<br>
+
 ## References
 [An Introduction to Hibernate 6](https://docs.jboss.org/hibernate/orm/6.5/introduction/html_single/Hibernate_Introduction.html#embeddable-objects)  
 [Jpa @Embedded and @Embeddable | Baeldung](https://www.baeldung.com/jpa-embedded-embeddable)  
